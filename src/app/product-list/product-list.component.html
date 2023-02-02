@@ -1,0 +1,40 @@
+<h2>Products</h2>
+<div *ngFor="let product of products">
+  <!-- *ngFor within the <div> repeats for each product in the list-->
+
+  <h3>
+    <!--
+      Using the syntax [] is an example of property binding.
+      
+      The routerLink directive helps you customise the anchor element.
+    -->
+    <a  [title]="product.name + ' details'"
+        [routerLink]="['/products', product.id]">
+      {{ product.name }}
+    </a>
+  </h3>
+
+  <!-- On a <p> element, use a *ngIf directive so that Angular only creates the <p> element if the current product has a discription -->
+  <p *ngIf="product.description">
+    Description: {{ product.description }}
+  </p>
+
+  <!-- Adds a button so users can share a product. Bind the button's click event to the share() method in product-list.component.ts 
+  
+  Event binding uses a set of parentheses () aroundthe event, as the (click) event on the <button> element.-->
+  <button type="button" (click)="share()">
+    Share
+  </button>
+
+  <app-product-alerts
+  [product]="product"
+  (notify)="onNotify()">
+  </app-product-alerts>
+
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
